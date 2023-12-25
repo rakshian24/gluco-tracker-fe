@@ -1,88 +1,119 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import { CheckboxLabel, ErrorText, FormButton, FormFirstRowContainer, FormItem, PageTitle, TextArea } from '../../../../common/styled-components';
-import { ROUTES, SELECT_DROP_DOWN_OPTIONS, BUTTON_TYPE } from '../../../../constants';
-import SelectDropdown from '../../../../components/SelectDropdown';
-import { FormFooterContainer } from '../../../profile/styles';
-import LoadingSpinner from '../../../../components/LoadingSpinner';
-import { isArrayEmpty, isObjectEmpty, showConsumedFoodsTagBox, showIsMedsTakenCheckbox } from '../../../../utils';
-import { useCreateFood, useCreateReading } from '../../../../common/slices';
-import MultiSelectBox from '../../../../components/MultiSelectBox';
+import {
+  CheckboxLabel,
+  ErrorText,
+  FormButton,
+  FormFirstRowContainer,
+  FormItem,
+  PageTitle,
+  TextArea,
+} from "../../../../common/styled-components";
+import {
+  ROUTES,
+  SELECT_DROP_DOWN_OPTIONS,
+  BUTTON_TYPE,
+} from "../../../../constants";
+import SelectDropdown from "../../../../components/SelectDropdown";
+import { FormFooterContainer } from "../../../profile/styles";
+import LoadingSpinner from "../../../../components/LoadingSpinner";
+import {
+  getMealTypeName,
+  isArrayEmpty,
+  isObjectEmpty,
+  showConsumedFoodsTagBox,
+  showFoodConsumedAt,
+  showIsMedsTakenCheckbox,
+} from "../../../../utils";
+import { useCreateFood, useCreateReading } from "../../../../common/slices";
+import MultiSelectBox from "../../../../components/MultiSelectBox";
+import moment from "moment";
 
 const defaultFormFields = {
-  type: '',
+  type: "",
   reading: 0,
   isExercised: false,
-  description: ''
+  description: "",
+  foodConsumedAt: "",
 };
 
 const CreateGlucoseReading = () => {
   const [selectedValue, setSelectedValue] = useState();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [formError, setFormError] = useState({});
-  const [isMedsTakenCheckBoxValue, setIsMedsTakenCheckBoxValue] = useState(null);
-  const [isExercisedCheckBoxValue, setIsExercisedCheckBoxValue] = useState(false);
+  const [isMedsTakenCheckBoxValue, setIsMedsTakenCheckBoxValue] =
+    useState(null);
+  const [isExercisedCheckBoxValue, setIsExercisedCheckBoxValue] =
+    useState(false);
   const [selectedMultiValue, setSelectedMultiValue] = useState([]);
-  const [, setMultiSelectInputVal] = useState('');
+  const [, setMultiSelectInputVal] = useState("");
   const navigate = useNavigate();
 
-  const [newReading, { createReadingInit, isLoading, createReadingError, resetCreateReading }] = useCreateReading();
+  const [
+    newReading,
+    { createReadingInit, isLoading, createReadingError, resetCreateReading },
+  ] = useCreateReading();
   const [newFood, { createFoodInit }] = useCreateFood();
 
   //On successfull creation of food, appending the selectedMultiValue array with the newly created food
   useEffect(() => {
     if (!isObjectEmpty(newFood)) {
-      setSelectedMultiValue([...selectedMultiValue, newFood])
+      setSelectedMultiValue([...selectedMultiValue, newFood]);
     }
-  }, [newFood, setSelectedMultiValue])
+  }, [newFood, setSelectedMultiValue]);
 
   //On successfull creation of reading, navigate the user to dashboard page
   useEffect(() => {
     if (!isObjectEmpty(newReading)) {
-      resetCreateReading()
+      resetCreateReading();
       navigate(ROUTES.DASHBOARD);
     }
-  }, [newReading, navigate])
+  }, [newReading, navigate]);
 
   //To show error messages and toast on submit, in case of error
   useEffect(() => {
-    if (createReadingError && typeof (createReadingError) === 'string') {
-      toast.error(createReadingError)
+    if (createReadingError && typeof createReadingError === "string") {
+      toast.error(createReadingError);
     }
     if (createReadingError && !isArrayEmpty(Object.keys(createReadingError))) {
-      setFormError(createReadingError)
+      setFormError(createReadingError);
     }
-  }, [createReadingError])
-
+  }, [createReadingError]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
       ...formFields,
-      type: selectedValue?.value || '',
+      type: selectedValue?.value || "",
       isExercised: isExercisedCheckBoxValue,
-      ...(showIsMedsTakenCheckbox(selectedValue?.value) && { isMedsTaken: isMedsTakenCheckBoxValue }),
-      consumedFoods: selectedMultiValue.map(foodsObj => foodsObj._id)
-    }
-    createReadingInit(payload)
-  }
+      ...(showIsMedsTakenCheckbox(selectedValue?.value) && {
+        isMedsTaken: isMedsTakenCheckBoxValue,
+      }),
+      consumedFoods: selectedMultiValue.map((foodsObj) => foodsObj._id),
+      foodConsumedAt: moment(formFields.foodConsumedAt, "HH:mm").toDate(),
+    };
+    createReadingInit(payload);
+  };
 
   const hanldeInputValueChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'reading') {
-      setFormError({ ...formError, reading: '' });
+    if (name === "reading") {
+      setFormError({ ...formError, reading: "" });
 
       // Below regex is for allowing only positive non decimal numbers with null value
-      if (!(/^(?!0+(?:\0+)?)\d*(?:\d+)?$/.test(value))) {
-        setFormError({ ...formError, reading: 'Special characters are not allowed.' })
-        return
+      if (!/^(?!0+(?:\0+)?)\d*(?:\d+)?$/.test(value)) {
+        setFormError({
+          ...formError,
+          reading: "Special characters are not allowed.",
+        });
+        return;
       }
     }
 
-    if (name === 'description') {
-      setFormError({ ...formError, description: '' })
+    if (name === "description") {
+      setFormError({ ...formError, description: "" });
     }
 
     setFormFields({ ...formFields, [name]: value });
@@ -90,32 +121,30 @@ const CreateGlucoseReading = () => {
 
   const handleOnDropDownSelect = (val) => {
     //To disable the error text, once the dropdown value is selected
-    setFormError({ ...formError, type: '' });
+    setFormError({ ...formError, type: "" });
     setSelectedValue(val);
-  }
+  };
 
   const handleOnMultiSelectInputChange = (value) => {
-    setMultiSelectInputVal(value)
-  }
+    setMultiSelectInputVal(value);
+  };
 
   const handleOnMultiSelectChange = (value) => {
-    setSelectedMultiValue(value)
-  }
+    setSelectedMultiValue(value);
+  };
 
   const handleOnCreateFood = (query) => {
-    const newFoodObj = { value: query, label: query }
+    const newFoodObj = { value: query, label: query };
     createFoodInit(newFoodObj);
-  }
+  };
 
   if (isLoading) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
 
   return (
     <div style={{ width: "100%" }}>
-      <PageTitle>
-        Create Reading
-      </PageTitle>
+      <PageTitle>Create Reading</PageTitle>
       <form onSubmit={handleSubmit}>
         <FormFirstRowContainer>
           <FormItem id="type">
@@ -124,12 +153,14 @@ const CreateGlucoseReading = () => {
               dropDownOptions={SELECT_DROP_DOWN_OPTIONS}
               selectedValue={selectedValue}
               setSelectedValue={(val) => handleOnDropDownSelect(val)}
-              placeholder={<div style={{ fontFamily: 'Roboto' }}>Select type</div>}
+              placeholder={
+                <div style={{ fontFamily: "Roboto" }}>Select type</div>
+              }
             />
             <ErrorText>{formError.type}</ErrorText>
           </FormItem>
 
-          <FormItem id="reading" className='form-input-container'>
+          <FormItem id="reading" className="form-input-container">
             <label>Reading</label>
             <input
               placeholder="Enter your reading"
@@ -150,7 +181,9 @@ const CreateGlucoseReading = () => {
                 name="isMedsTaken"
                 type="checkbox"
                 value={isMedsTakenCheckBoxValue}
-                onChange={() => setIsMedsTakenCheckBoxValue(!isMedsTakenCheckBoxValue)}
+                onChange={() =>
+                  setIsMedsTakenCheckBoxValue(!isMedsTakenCheckBoxValue)
+                }
                 checked={isMedsTakenCheckBoxValue}
               />
               <span>Did you take your pills?</span>
@@ -165,7 +198,9 @@ const CreateGlucoseReading = () => {
               name="isExercised"
               type="checkbox"
               value={isExercisedCheckBoxValue}
-              onChange={() => setIsExercisedCheckBoxValue(!isExercisedCheckBoxValue)}
+              onChange={() =>
+                setIsExercisedCheckBoxValue(!isExercisedCheckBoxValue)
+              }
               checked={isExercisedCheckBoxValue}
             />
             <span>Did you exercise?</span>
@@ -186,6 +221,21 @@ const CreateGlucoseReading = () => {
           </FormItem>
         )}
 
+        {showFoodConsumedAt(selectedValue?.value) && (
+          <FormItem id="foodConsumedAt">
+            <label>{`When did you finish your ${getMealTypeName(
+              selectedValue?.value
+            )}?`}</label>
+            <input
+              name="foodConsumedAt"
+              type="time"
+              value={formFields.foodConsumedAt}
+              onChange={hanldeInputValueChange}
+            />
+            <ErrorText>{formError.foodConsumedAt}</ErrorText>
+          </FormItem>
+        )}
+
         <FormItem id="description">
           <label>Description</label>
           <TextArea
@@ -194,14 +244,16 @@ const CreateGlucoseReading = () => {
             name="description"
             value={formFields.description}
             onChange={hanldeInputValueChange}
-          >
-          </TextArea>
+          ></TextArea>
           <ErrorText>{formError.description}</ErrorText>
         </FormItem>
 
         <FormFooterContainer style={{ marginTop: "3rem" }}>
           <Link to="/dashboard">
-            <FormButton className="form-button" priority={BUTTON_TYPE.SECONDARY}>
+            <FormButton
+              className="form-button"
+              priority={BUTTON_TYPE.SECONDARY}
+            >
               Cancel
             </FormButton>
           </Link>
@@ -211,7 +263,7 @@ const CreateGlucoseReading = () => {
         </FormFooterContainer>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default CreateGlucoseReading
+export default CreateGlucoseReading;
