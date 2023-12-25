@@ -14,6 +14,7 @@ export function* signIn(action) {
         ...action.payload,
       },
       {
+        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
