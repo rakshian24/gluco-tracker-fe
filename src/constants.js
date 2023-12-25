@@ -1,7 +1,7 @@
 import { isDev } from "./utils";
 
 export const DEV_BASE_URL = "http://localhost:5002";
-export const PROD_BASE_URL = "https://rakshian-gluco-tracker.vercel.app";
+export const PROD_BASE_URL = "https://rakshian-gluco-tracker-be.vercel.app";
 
 export const BASE_URL = isDev() ? DEV_BASE_URL : PROD_BASE_URL;
 
