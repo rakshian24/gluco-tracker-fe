@@ -39,6 +39,20 @@ export const showConsumedFoodsTagBox = (selectedValue) => {
   return ["AB", "AL", "AD"].includes(selectedValue);
 };
 
+export const getMealTypeName = (selectedValue) => {
+  if (selectedValue === "AB") {
+    return "breakfast";
+  } else if (selectedValue === "AL") {
+    return "lunch";
+  } else if (selectedValue === "AD") {
+    return "dinner";
+  }
+};
+
+export const showFoodConsumedAt = (selectedValue) => {
+  return ["AB", "AL", "AD"].includes(selectedValue);
+};
+
 export const isArrayEmpty = (arr) => {
   return arr && arr.length > 0 ? false : true;
 };
