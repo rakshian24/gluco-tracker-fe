@@ -60,6 +60,17 @@ export const SELECT_DROP_DOWN_OPTIONS = [
   },
 ];
 
+export const READING_INTERVAL_OPTIONS = [
+  {
+    label: "1 hour after",
+    value: 1,
+  },
+  {
+    label: "2 hours after",
+    value: 2,
+  },
+];
+
 export const TYPES_MAP = {
   BB: "Before breakfast",
   AB: "After breakfast",

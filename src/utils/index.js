@@ -53,6 +53,10 @@ export const showFoodConsumedAt = (selectedValue) => {
   return ["AB", "AL", "AD"].includes(selectedValue);
 };
 
+export const showReadingIntervalDropdown = (selectedValue) => {
+  return ["AB", "AL", "AD"].includes(selectedValue);
+};
+
 export const isArrayEmpty = (arr) => {
   return arr && arr.length > 0 ? false : true;
 };
