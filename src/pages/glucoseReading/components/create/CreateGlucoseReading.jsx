@@ -15,6 +15,7 @@ import {
   ROUTES,
   SELECT_DROP_DOWN_OPTIONS,
   BUTTON_TYPE,
+  READING_INTERVAL_OPTIONS,
 } from "../../../../constants";
 import SelectDropdown from "../../../../components/SelectDropdown";
 import { FormFooterContainer } from "../../../profile/styles";
@@ -26,6 +27,7 @@ import {
   showConsumedFoodsTagBox,
   showFoodConsumedAt,
   showIsMedsTakenCheckbox,
+  showReadingIntervalDropdown,
 } from "../../../../utils";
 import { useCreateFood, useCreateReading } from "../../../../common/slices";
 import MultiSelectBox from "../../../../components/MultiSelectBox";
@@ -41,6 +43,7 @@ const defaultFormFields = {
 
 const CreateGlucoseReading = () => {
   const [selectedValue, setSelectedValue] = useState();
+  const [selectedIntervalValue, setSelectedIntervalValue] = useState();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [formError, setFormError] = useState({});
   const [isMedsTakenCheckBoxValue, setIsMedsTakenCheckBoxValue] =
@@ -93,6 +96,7 @@ const CreateGlucoseReading = () => {
       }),
       consumedFoods: selectedMultiValue.map((foodsObj) => foodsObj._id),
       foodConsumedAt: moment(formFields.foodConsumedAt, "HH:mm").toDate(),
+      interval: selectedIntervalValue?.value || 1,
     };
     createReadingInit(payload);
   };
@@ -119,10 +123,14 @@ const CreateGlucoseReading = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const handleOnDropDownSelect = (val) => {
+  const handleOnDropDownSelect = (val, type) => {
     //To disable the error text, once the dropdown value is selected
-    setFormError({ ...formError, type: "" });
-    setSelectedValue(val);
+    setFormError({ ...formError, type: "", interval: "" });
+    if (type === "readingType") {
+      setSelectedValue(val);
+    } else {
+      setSelectedIntervalValue(val);
+    }
   };
 
   const handleOnMultiSelectInputChange = (value) => {
@@ -152,13 +160,32 @@ const CreateGlucoseReading = () => {
             <SelectDropdown
               dropDownOptions={SELECT_DROP_DOWN_OPTIONS}
               selectedValue={selectedValue}
-              setSelectedValue={(val) => handleOnDropDownSelect(val)}
+              setSelectedValue={(val) =>
+                handleOnDropDownSelect(val, "readingType")
+              }
               placeholder={
                 <div style={{ fontFamily: "Roboto" }}>Select type</div>
               }
             />
             <ErrorText>{formError.type}</ErrorText>
           </FormItem>
+
+          {showReadingIntervalDropdown(selectedValue?.value) && (
+            <FormItem id="interval">
+              <label>Interval</label>
+              <SelectDropdown
+                dropDownOptions={READING_INTERVAL_OPTIONS}
+                selectedValue={selectedIntervalValue}
+                setSelectedValue={(val) =>
+                  handleOnDropDownSelect(val, "readingInterval")
+                }
+                placeholder={
+                  <div style={{ fontFamily: "Roboto" }}>Select interval</div>
+                }
+              />
+              <ErrorText>{formError.interval}</ErrorText>
+            </FormItem>
+          )}
 
           <FormItem id="reading" className="form-input-container">
             <label>Reading</label>
@@ -224,7 +251,7 @@ const CreateGlucoseReading = () => {
         {showFoodConsumedAt(selectedValue?.value) && (
           <FormItem id="foodConsumedAt">
             <label>{`When did you finish your ${getMealTypeName(
-              selectedValue?.value,
+              selectedValue?.value
             )}?`}</label>
             <input
               name="foodConsumedAt"

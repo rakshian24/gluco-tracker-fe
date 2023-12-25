@@ -4,7 +4,6 @@ import { useTheme } from "styled-components";
 
 import { useFetchFoods } from "../../common/slices";
 import LoadingSpinner from "../LoadingSpinner";
-import { useWindowSize } from "../../hooks/useWindowResize";
 
 const MultiSelectBox = ({
   selectedMultiValue,
@@ -14,8 +13,6 @@ const MultiSelectBox = ({
 }) => {
   const [foods, { fetchFoodsInit, isFetchFoodsLoading }] = useFetchFoods();
   const theme = useTheme();
-  const [screenWidth] = useWindowSize();
-  const isLargeScreen = screenWidth > 500;
 
   useEffect(() => {
     fetchFoodsInit();
@@ -50,7 +47,7 @@ const MultiSelectBox = ({
           ...baseStyles,
           minHeight: "5rem",
           height: "auto",
-          width: isLargeScreen ? "95%" : "100%",
+          width: "100%",
           fontSize: "1.65rem",
           cursor: "pointer",
           fontFamily: "inherit",
