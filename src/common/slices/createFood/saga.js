@@ -21,7 +21,7 @@ export function* createFood(action) {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     yield put(createFoodSuccess(response.data.data));
   } catch (error) {

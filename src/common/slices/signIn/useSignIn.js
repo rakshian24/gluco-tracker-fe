@@ -1,6 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { signInInit as signInInitAction } from './actions';
-import { getSignInLoading, getSignInError, getIsSignInSuccess } from './reducer';
+import { useSelector, useDispatch } from "react-redux";
+import { signInInit as signInInitAction } from "./actions";
+import {
+  getSignInLoading,
+  getSignInError,
+  getIsSignInSuccess,
+} from "./reducer";
 
 function useSignIn() {
   const dispatch = useDispatch();
@@ -13,7 +17,7 @@ function useSignIn() {
       isLoading: isSignInLoading,
       signInError,
       signInInit,
-      isSignInSuccess
+      isSignInSuccess,
     },
   ];
 }

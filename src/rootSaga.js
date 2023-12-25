@@ -1,4 +1,4 @@
-import { spawn } from 'redux-saga/effects';
+import { spawn } from "redux-saga/effects";
 import {
   signUpSaga,
   signInSaga,
@@ -7,8 +7,8 @@ import {
   fetchReadingsSaga,
   fetchReadingDetailsSaga,
   createFoodSaga,
-  fetchFoodsSaga
-} from './common/slices';
+  fetchFoodsSaga,
+} from "./common/slices";
 
 export default function* rootSaga() {
   yield spawn(signUpSaga);

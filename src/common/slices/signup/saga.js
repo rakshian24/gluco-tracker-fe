@@ -18,7 +18,7 @@ export function* signUp(action) {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     yield put(setCredentials(response.data.data));
     yield put(signUpSuccess(response.data.data));

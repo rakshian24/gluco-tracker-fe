@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
-import { styled } from 'styled-components';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { styled } from "styled-components";
+import { Link } from "react-router-dom";
 
-import Avatar from '../../components/Avatar';
-import { useAuth, useSignOut } from '../../common/slices';
-import { toast } from 'react-toastify';
+import Avatar from "../../components/Avatar";
+import { useAuth, useSignOut } from "../../common/slices";
+import { toast } from "react-toastify";
 
 const SignOutPageContainer = styled.div`
   display: flex;
@@ -52,28 +52,26 @@ const SignOut = () => {
   const [{ signOutInit, signOutError }] = useSignOut();
 
   useEffect(() => {
-    if (signOutError && typeof (signOutError) === 'string') {
-      toast.error(signOutError)
+    if (signOutError && typeof signOutError === "string") {
+      toast.error(signOutError);
     }
-  }, [signOutError])
+  }, [signOutError]);
 
   const handleSignOut = () => {
-    signOutInit()
+    signOutInit();
   };
 
   return (
     <SignOutPageContainer>
-      <Avatar size={'lg'} />
-      <UserName>{userInfo?.name || 'UserName'}</UserName>
-      <UserEmail>{userInfo?.email || 'Email'}</UserEmail>
-      <Link to='/profile'>
+      <Avatar size={"lg"} />
+      <UserName>{userInfo?.name || "UserName"}</UserName>
+      <UserEmail>{userInfo?.email || "Email"}</UserEmail>
+      <Link to="/profile">
         <LinkText> Edit Profile</LinkText>
       </Link>
-      <SignOutButton onClick={handleSignOut}>
-        Sign out
-      </SignOutButton>
+      <SignOutButton onClick={handleSignOut}>Sign out</SignOutButton>
     </SignOutPageContainer>
-  )
-}
+  );
+};
 
-export default SignOut
+export default SignOut;

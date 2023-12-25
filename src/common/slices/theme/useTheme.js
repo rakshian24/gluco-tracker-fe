@@ -1,6 +1,6 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { setTheme as setThemeAction } from './actions';
-import { getTheme } from './reducer';
+import { useSelector, useDispatch } from "react-redux";
+import { setTheme as setThemeAction } from "./actions";
+import { getTheme } from "./reducer";
 
 function useTheme() {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ function useTheme() {
   return [
     theme,
     {
-      setTheme
+      setTheme,
     },
   ];
 }

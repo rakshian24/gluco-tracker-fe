@@ -1,6 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { signUpInit as signUpInitAction } from './actions';
-import { getSignUpLoading, getSignUpError, getIsSignUpSuccess } from './reducer';
+import { useSelector, useDispatch } from "react-redux";
+import { signUpInit as signUpInitAction } from "./actions";
+import {
+  getSignUpLoading,
+  getSignUpError,
+  getIsSignUpSuccess,
+} from "./reducer";
 
 function useSignUp() {
   const dispatch = useDispatch();
@@ -13,7 +17,7 @@ function useSignUp() {
       isLoading: isSignUpLoading,
       signUpError,
       signUpInit,
-      isSignUpSuccess
+      isSignUpSuccess,
     },
   ];
 }

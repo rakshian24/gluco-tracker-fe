@@ -1,18 +1,25 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Heading, ProfileContainer, FormFooterContainer } from './styles';
-import { ErrorText, FormButton, FormItem } from '../../common/styled-components';
-import { useUpdateUserDetailsMutation } from '../../slices/userApiSlice';
-import { setCredentials } from '../../slices/authSlice';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import { BUTTON_TYPE } from '../../constants';
+import { Heading, ProfileContainer, FormFooterContainer } from "./styles";
+import {
+  ErrorText,
+  FormButton,
+  FormItem,
+} from "../../common/styled-components";
+import { useUpdateUserDetailsMutation } from "../../slices/userApiSlice";
+import { setCredentials } from "../../slices/authSlice";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { BUTTON_TYPE } from "../../constants";
 
 const Profile = () => {
   const { userInfo } = useSelector((state) => state.auth);
-  const [formFields, setFormFields] = useState({ name: userInfo?.name || '', email: userInfo?.email || '' });
+  const [formFields, setFormFields] = useState({
+    name: userInfo?.name || "",
+    email: userInfo?.email || "",
+  });
   const [formError, setFormError] = useState({});
 
   const dispatch = useDispatch();
@@ -23,14 +30,14 @@ const Profile = () => {
     let error = {};
 
     if (!formFields.name) {
-      error.name = 'Name is required';
+      error.name = "Name is required";
     }
     if (!formFields.email) {
-      error.email = 'Email is required';
+      error.email = "Email is required";
     }
 
     return error;
-  }
+  };
 
   const hanldeInputValueChange = (event) => {
     const { name, value } = event.target;
@@ -43,15 +50,15 @@ const Profile = () => {
     try {
       const res = await updateUserDetails({ ...formFields }).unwrap();
       dispatch(setCredentials({ ...res }));
-      toast.success('Profile updated successfully!');
-      navigate('/dashboard');
+      toast.success("Profile updated successfully!");
+      navigate("/dashboard");
     } catch (err) {
-      toast.error('Profile update failed!');
+      toast.error("Profile update failed!");
     }
   };
 
   if (isLoading) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
 
   return (
@@ -84,7 +91,10 @@ const Profile = () => {
 
           <FormFooterContainer>
             <Link to="/dashboard">
-              <FormButton className="form-button" priority={BUTTON_TYPE.SECONDARY}>
+              <FormButton
+                className="form-button"
+                priority={BUTTON_TYPE.SECONDARY}
+              >
                 Cancel
               </FormButton>
             </Link>
@@ -95,7 +105,7 @@ const Profile = () => {
         </form>
       </div>
     </ProfileContainer>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

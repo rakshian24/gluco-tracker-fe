@@ -1,6 +1,6 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchFoodsInit as fetchFoodsInitAction } from './actions';
-import { getFoodsLoading, getFoods, getFoodsError } from './reducer';
+import { useSelector, useDispatch } from "react-redux";
+import { fetchFoodsInit as fetchFoodsInitAction } from "./actions";
+import { getFoodsLoading, getFoods, getFoodsError } from "./reducer";
 
 function useFetchFoods() {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ function useFetchFoods() {
     {
       fetchFoodsInit,
       isFetchFoodsLoading,
-      fetchFoodsError
+      fetchFoodsError,
     },
   ];
 }

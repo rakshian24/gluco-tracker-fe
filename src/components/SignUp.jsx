@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import { ErrorText, FormButton, FormFooterTextContainer, FormHeading, FormItem, StyledLink } from '../common/styled-components';
-import LoadingSpinner from './LoadingSpinner';
-import { useAuth, useSignUp } from '../common/slices';
-import { isArrayEmpty } from '../utils';
-import { ROUTES } from '../constants';
+import {
+  ErrorText,
+  FormButton,
+  FormFooterTextContainer,
+  FormHeading,
+  FormItem,
+  StyledLink,
+} from "../common/styled-components";
+import LoadingSpinner from "./LoadingSpinner";
+import { useAuth, useSignUp } from "../common/slices";
+import { isArrayEmpty } from "../utils";
+import { ROUTES } from "../constants";
 
 const defaultFormFields = {
   name: "",
@@ -24,13 +31,13 @@ const SignUp = () => {
   const [userInfo] = useAuth();
 
   useEffect(() => {
-    if (signUpError && typeof (signUpError) === 'string') {
-      toast.error(signUpError)
+    if (signUpError && typeof signUpError === "string") {
+      toast.error(signUpError);
     }
     if (signUpError && !isArrayEmpty(Object.keys(signUpError))) {
-      setFormError(signUpError)
+      setFormError(signUpError);
     }
-  }, [signUpError])
+  }, [signUpError]);
 
   useEffect(() => {
     if (isSignUpSuccess || userInfo) {
@@ -49,7 +56,7 @@ const SignUp = () => {
   };
 
   if (isLoading) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
 
   return (
@@ -106,7 +113,10 @@ const SignUp = () => {
           </FormItem>
 
           <FormFooterTextContainer>
-            <p>Already have an account? <StyledLink to={'/sign-in'}>Sign In</StyledLink></p>
+            <p>
+              Already have an account?{" "}
+              <StyledLink to={"/sign-in"}>Sign In</StyledLink>
+            </p>
           </FormFooterTextContainer>
 
           <FormButton className="form-button" type="submit">
@@ -115,7 +125,7 @@ const SignUp = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;

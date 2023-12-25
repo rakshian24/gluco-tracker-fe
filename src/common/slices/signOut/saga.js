@@ -16,7 +16,7 @@ export function* signOut() {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     yield put(clearCredentials());
     yield put(signOutSuccess());

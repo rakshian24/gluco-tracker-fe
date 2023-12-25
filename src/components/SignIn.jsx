@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-import { ErrorText, FormButton, FormFooterTextContainer, FormHeading, FormItem, StyledLink } from '../common/styled-components';
-import LoadingSpinner from './LoadingSpinner';
-import { ROUTES } from '../constants';
-import { useAuth, useSignIn } from '../common/slices';
-import { isArrayEmpty } from '../utils';
+import {
+  ErrorText,
+  FormButton,
+  FormFooterTextContainer,
+  FormHeading,
+  FormItem,
+  StyledLink,
+} from "../common/styled-components";
+import LoadingSpinner from "./LoadingSpinner";
+import { ROUTES } from "../constants";
+import { useAuth, useSignIn } from "../common/slices";
+import { isArrayEmpty } from "../utils";
 
 const defaultFormFields = {
   email: "",
@@ -22,13 +29,13 @@ const SignIn = () => {
   const [userInfo] = useAuth();
 
   useEffect(() => {
-    if (signInError && typeof (signInError) === 'string') {
-      toast.error(signInError)
+    if (signInError && typeof signInError === "string") {
+      toast.error(signInError);
     }
     if (signInError && !isArrayEmpty(Object.keys(signInError))) {
-      setFormError(signInError)
+      setFormError(signInError);
     }
-  }, [signInError])
+  }, [signInError]);
 
   useEffect(() => {
     if (signInSuccess || userInfo) {
@@ -47,7 +54,7 @@ const SignIn = () => {
   };
 
   if (isLoading) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
 
   return (
@@ -80,7 +87,9 @@ const SignIn = () => {
           </FormItem>
 
           <FormFooterTextContainer>
-            <p>Don't have an account? <StyledLink to={'/'}>Sign Up</StyledLink></p>
+            <p>
+              Don't have an account? <StyledLink to={"/"}>Sign Up</StyledLink>
+            </p>
           </FormFooterTextContainer>
 
           <FormButton className="form-button" type="submit">
@@ -89,7 +98,7 @@ const SignIn = () => {
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;

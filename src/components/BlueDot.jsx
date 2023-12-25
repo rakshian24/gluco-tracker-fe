@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { styled } from 'styled-components';
-import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { styled } from "styled-components";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
-import Avatar from './Avatar';
-import { useSignOut } from '../common/slices';
-import LoadingSpinner from './LoadingSpinner';
+import Avatar from "./Avatar";
+import { useSignOut } from "../common/slices";
+import LoadingSpinner from "./LoadingSpinner";
 
 const BlueDotContainer = styled.div`
   margin-left: 0;
-  @media screen and (min-width: 501px){
+  @media screen and (min-width: 501px) {
     margin-left: 2rem;
   }
 `;
@@ -28,12 +28,12 @@ const BlueDotDropDownContainer = styled.div`
   align-items: center;
   flex-direction: column;
 
-  @media screen and (min-width: 501px){
+  @media screen and (min-width: 501px) {
     top: 6.4rem;
     height: auto;
   }
 
-  @media screen and (min-width: 1024px){
+  @media screen and (min-width: 1024px) {
     width: 38rem;
     margin-right: 1rem;
   }
@@ -72,11 +72,10 @@ const SignOutButton = styled.button`
   font-weight: 500;
   width: 100%;
   cursor: pointer;
-  
-  @media screen and (min-width: 501px) and (max-width: 1023px){
+
+  @media screen and (min-width: 501px) and (max-width: 1023px) {
     width: 50%;
   }
-
 `;
 
 const BlueDot = ({ userInfo }) => {
@@ -84,39 +83,42 @@ const BlueDot = ({ userInfo }) => {
   const [{ isLoading, signOutInit, signOutError }] = useSignOut();
 
   useEffect(() => {
-    if (signOutError && typeof (signOutError) === 'string') {
-      toast.error(signOutError)
+    if (signOutError && typeof signOutError === "string") {
+      toast.error(signOutError);
     }
-  }, [signOutError])
+  }, [signOutError]);
 
   const handleSignOut = async () => {
-    signOutInit()
+    signOutInit();
   };
 
   const handleBlueDotClick = () => {
-    setIsBlueDotClicked(!isBlueDotClicked)
-  }
+    setIsBlueDotClicked(!isBlueDotClicked);
+  };
 
   if (isLoading) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
 
   return (
     <BlueDotContainer>
       <Avatar handleOnClick={() => handleBlueDotClick()} />
-      {isBlueDotClicked && userInfo && <BlueDotDropDownContainer>
-        <Avatar size={'lg'} />
-        <UserName>{userInfo?.name || 'UserName'}</UserName>
-        <UserEmail>{userInfo?.email || 'Email'}</UserEmail>
-        <Link to='/profile'>
-          <LinkText onClick={() => setIsBlueDotClicked(false)}> Edit Profile</LinkText>
-        </Link>
-        <SignOutButton onClick={handleSignOut}>
-          Sign out
-        </SignOutButton>
-      </BlueDotDropDownContainer>}
+      {isBlueDotClicked && userInfo && (
+        <BlueDotDropDownContainer>
+          <Avatar size={"lg"} />
+          <UserName>{userInfo?.name || "UserName"}</UserName>
+          <UserEmail>{userInfo?.email || "Email"}</UserEmail>
+          <Link to="/profile">
+            <LinkText onClick={() => setIsBlueDotClicked(false)}>
+              {" "}
+              Edit Profile
+            </LinkText>
+          </Link>
+          <SignOutButton onClick={handleSignOut}>Sign out</SignOutButton>
+        </BlueDotDropDownContainer>
+      )}
     </BlueDotContainer>
-  )
-}
+  );
+};
 
-export default BlueDot
+export default BlueDot;

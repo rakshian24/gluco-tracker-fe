@@ -4,7 +4,9 @@ export const ListContainer = styled.fieldset`
   border: none;
   padding: 1.5rem 2.5rem;
   border-radius: 1rem;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   margin-bottom: 3rem;
   background: ${({ theme }) => theme.linearGradientColor};
   color: ${({ theme }) => theme.white};
@@ -12,7 +14,7 @@ export const ListContainer = styled.fieldset`
   cursor: pointer;
   height: auto;
 
-  @media screen and (min-width: 501px){
+  @media screen and (min-width: 501px) {
     width: 48.5%;
     min-width: 48.5%;
   }
