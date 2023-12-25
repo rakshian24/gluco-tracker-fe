@@ -12,11 +12,10 @@ export function* signOut() {
       `${BASE_URL}/${API_ENDPOINTS.SIGN_OUT}`,
       {},
       {
-        withCredentials: true,
         headers: {
           "Content-Type": "application/json",
         },
-      },
+      }
     );
     yield put(clearCredentials());
     yield put(signOutSuccess());
