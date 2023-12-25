@@ -1,6 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { createFoodInit as createFoodInitAction } from './actions';
-import { getCreateFoodLoading, getNewFood, getCreateFoodError } from './reducer';
+import { useSelector, useDispatch } from "react-redux";
+import { createFoodInit as createFoodInitAction } from "./actions";
+import {
+  getCreateFoodLoading,
+  getNewFood,
+  getCreateFoodError,
+} from "./reducer";
 
 function useCreateFood() {
   const dispatch = useDispatch();
@@ -13,7 +17,7 @@ function useCreateFood() {
     {
       createFoodInit,
       isLoading: isCreateFoodLoading,
-      createFoodError
+      createFoodError,
     },
   ];
 }

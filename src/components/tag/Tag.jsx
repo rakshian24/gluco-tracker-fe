@@ -1,5 +1,5 @@
-import React from 'react';
-import { StyledTag } from './styles';
+import React from "react";
+import { StyledTag } from "./styles";
 
 const Tag = ({ tag }) => {
   const { value } = tag;

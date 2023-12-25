@@ -224,7 +224,7 @@ const CreateGlucoseReading = () => {
         {showFoodConsumedAt(selectedValue?.value) && (
           <FormItem id="foodConsumedAt">
             <label>{`When did you finish your ${getMealTypeName(
-              selectedValue?.value
+              selectedValue?.value,
             )}?`}</label>
             <input
               name="foodConsumedAt"

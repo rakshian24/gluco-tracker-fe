@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const GlucoseReadingLists = () => {
-  return (
-    <div>GlucoseReadingLists</div>
-  )
-}
+  return <div>GlucoseReadingLists</div>;
+};
 
-export default GlucoseReadingLists
+export default GlucoseReadingLists;

@@ -1,4 +1,4 @@
-import { SET_THEME } from './actions';
+import { SET_THEME } from "./actions";
 import { initialState } from "../../../initialState";
 
 export const theme = (state = initialState.theme, { type, payload }) => {

@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { styled } from 'styled-components';
-import logo from "../assets/pngs/logo.png"
+import React from "react";
+import { Link } from "react-router-dom";
+import { styled } from "styled-components";
+import logo from "../assets/pngs/logo.png";
 
 const LogoTitle = styled.div`
   font-size: 3rem;
@@ -16,7 +16,7 @@ const LogoContainer = styled.div`
 
 const LogoImageContainer = styled.div`
   margin-right: 1rem;
-  img{
+  img {
     width: 3.75rem;
     height: 3.75rem;
   }
@@ -32,7 +32,7 @@ const Logo = ({ title }) => {
         <LogoTitle>{title}</LogoTitle>
       </LogoContainer>
     </Link>
-  )
-}
+  );
+};
 
-export default Logo
+export default Logo;

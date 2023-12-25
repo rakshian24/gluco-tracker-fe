@@ -1,5 +1,9 @@
-import { combineReducers } from 'redux';
-import { FETCH_READINGS_INIT, FETCH_READINGS_SUCCESS, FETCH_READINGS_ERROR } from './actions';
+import { combineReducers } from "redux";
+import {
+  FETCH_READINGS_INIT,
+  FETCH_READINGS_SUCCESS,
+  FETCH_READINGS_ERROR,
+} from "./actions";
 
 export const fetchReadingsLoading = (state = null, { type }) => {
   switch (type) {
@@ -16,7 +20,7 @@ export const fetchReadingsLoading = (state = null, { type }) => {
 export const readings = (state = null, { type, payload }) => {
   switch (type) {
     case FETCH_READINGS_SUCCESS:
-      return payload
+      return payload;
     default:
       return state;
   }
@@ -30,7 +34,6 @@ export const fetchReadingsError = (state = null, { type, error }) => {
       return state;
   }
 };
-
 
 export default combineReducers({
   isLoading: fetchReadingsLoading,

@@ -1,6 +1,10 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { signOutInit as signOutInitAction } from './actions';
-import { getSignOutLoading, getSignOutError, getIsSignOutSuccess } from './reducer';
+import { useSelector, useDispatch } from "react-redux";
+import { signOutInit as signOutInitAction } from "./actions";
+import {
+  getSignOutLoading,
+  getSignOutError,
+  getIsSignOutSuccess,
+} from "./reducer";
 
 function useSignOut() {
   const dispatch = useDispatch();
@@ -13,7 +17,7 @@ function useSignOut() {
       isLoading: isSignOutLoading,
       signOutError,
       signOutInit,
-      isSignOutSuccess
+      isSignOutSuccess,
     },
   ];
 }

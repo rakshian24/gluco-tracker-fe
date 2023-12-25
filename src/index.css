@@ -10,7 +10,7 @@
 
 a {
   text-decoration: none;
-  color: inherit
+  color: inherit;
 }
 
 html {
@@ -19,7 +19,7 @@ html {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;

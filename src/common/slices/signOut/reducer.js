@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { SIGN_OUT_ERROR, SIGN_OUT_INIT, SIGN_OUT_SUCCESS } from './actions';
+import { combineReducers } from "redux";
+import { SIGN_OUT_ERROR, SIGN_OUT_INIT, SIGN_OUT_SUCCESS } from "./actions";
 
 export const signOutLoading = (state = null, { type }) => {
   switch (type) {
@@ -22,7 +22,7 @@ export const signOutSuccess = (state = null, { type }) => {
   }
 };
 
-export const signOutError = (state = null, { type = '', error }) => {
+export const signOutError = (state = null, { type = "", error }) => {
   switch (type) {
     case SIGN_OUT_ERROR:
       return error;
@@ -31,11 +31,10 @@ export const signOutError = (state = null, { type = '', error }) => {
   }
 };
 
-
 export default combineReducers({
   error: signOutError,
   isLoading: signOutLoading,
-  isSignOutSuccess: signOutSuccess
+  isSignOutSuccess: signOutSuccess,
 });
 
 export const getSignOutError = (state) => state.signOut.error?.data?.message;

@@ -15,7 +15,7 @@ export function* fetchFoods() {
       `${BASE_URL}/${API_ENDPOINTS.GET_ALL_FOODS_URL}`,
       {
         withCredentials: true,
-      }
+      },
     );
     yield put(fetchFoodsSuccess(response.data));
   } catch (error) {

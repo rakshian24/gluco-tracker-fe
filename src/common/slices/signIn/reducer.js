@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { SIGN_IN_ERROR, SIGN_IN_INIT, SIGN_IN_SUCCESS } from './actions';
+import { combineReducers } from "redux";
+import { SIGN_IN_ERROR, SIGN_IN_INIT, SIGN_IN_SUCCESS } from "./actions";
 
 export const signInLoading = (state = null, { type }) => {
   switch (type) {
@@ -22,7 +22,7 @@ export const signInSuccess = (state = null, { type }) => {
   }
 };
 
-export const signInError = (state = null, { type = '', error }) => {
+export const signInError = (state = null, { type = "", error }) => {
   switch (type) {
     case SIGN_IN_ERROR:
       return error;
@@ -31,11 +31,10 @@ export const signInError = (state = null, { type = '', error }) => {
   }
 };
 
-
 export default combineReducers({
   error: signInError,
   isLoading: signInLoading,
-  isSignInSuccess: signInSuccess
+  isSignInSuccess: signInSuccess,
 });
 
 export const getSignInError = (state) => state.signIn.error?.data?.message;

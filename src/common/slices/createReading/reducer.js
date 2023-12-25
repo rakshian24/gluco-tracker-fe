@@ -1,5 +1,10 @@
-import { combineReducers } from 'redux';
-import { CREATE_READING_INIT, CREATE_READING_SUCCESS, CREATE_READING_ERROR, RESET_CREATE_READING } from './actions';
+import { combineReducers } from "redux";
+import {
+  CREATE_READING_INIT,
+  CREATE_READING_SUCCESS,
+  CREATE_READING_ERROR,
+  RESET_CREATE_READING,
+} from "./actions";
 
 export const createReadingLoading = (state = null, { type }) => {
   switch (type) {
@@ -18,10 +23,10 @@ export const reading = (state = null, { type, payload }) => {
     case CREATE_READING_SUCCESS:
       return {
         ...state,
-        ...payload
-      }
+        ...payload,
+      };
     case RESET_CREATE_READING:
-      return null
+      return null;
     default:
       return state;
   }
@@ -36,13 +41,13 @@ export const createReadingError = (state = null, { type, error }) => {
   }
 };
 
-
 export default combineReducers({
   error: createReadingError,
   isLoading: createReadingLoading,
-  reading
+  reading,
 });
 
-export const getCreateReadingError = (state) => state.createReading.error?.data?.message;
+export const getCreateReadingError = (state) =>
+  state.createReading.error?.data?.message;
 export const getCreateReadingLoading = (state) => state.createReading.isLoading;
 export const getNewReading = (state) => state.createReading.reading;

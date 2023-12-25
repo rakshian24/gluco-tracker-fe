@@ -1,12 +1,12 @@
-import React from 'react';
-import { styled } from 'styled-components';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from "react";
+import { styled } from "styled-components";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import Logo from './Logo';
-import BlueDot from './BlueDot';
-import { BUTTON_TYPE, ROUTES, themes, themes_color_map } from '../constants';
-import { Button } from '../common/styled-components';
-import { useAuth, useTheme } from '../common/slices';
+import Logo from "./Logo";
+import BlueDot from "./BlueDot";
+import { BUTTON_TYPE, ROUTES, themes, themes_color_map } from "../constants";
+import { Button } from "../common/styled-components";
+import { useAuth, useTheme } from "../common/slices";
 
 const { green, violet } = themes;
 const { TERTIARY } = BUTTON_TYPE;
@@ -41,7 +41,9 @@ const ThemeSelector = styled.div`
   height: 2.5rem;
   border-radius: 50%;
   margin-left: 1.25rem;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow:
+    rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   background: ${({ type }) => {
     switch (type) {
       case green:
@@ -68,16 +70,18 @@ const Header = () => {
           <ThemeSelector type={violet} onClick={() => setTheme(violet)} />
           <ThemeSelector type={green} onClick={() => setTheme(green)} />
         </ThemeSelectorContainer>
-        {userInfo && pathname !== CREATE_READING && <Button
-          buttontype={TERTIARY}
-          onClick={() => navigate(CREATE_READING)}
-        >
-          Add Reading
-        </Button>}
+        {userInfo && pathname !== CREATE_READING && (
+          <Button
+            buttontype={TERTIARY}
+            onClick={() => navigate(CREATE_READING)}
+          >
+            Add Reading
+          </Button>
+        )}
         {userInfo && <BlueDot userInfo={userInfo} />}
       </HeaderRightContainer>
     </StyledHeader>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

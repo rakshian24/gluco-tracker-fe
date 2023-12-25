@@ -21,7 +21,7 @@ export function* createReading(action) {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     yield put(createReadingSuccess(response.data.data));
   } catch (error) {

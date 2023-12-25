@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 import {
   signup,
   auth,
@@ -9,7 +9,7 @@ import {
   readings,
   readingDetails,
   createFood,
-  foods
+  foods,
 } from "./common/slices";
 
 export default combineReducers({
@@ -22,5 +22,5 @@ export default combineReducers({
   readings,
   readingDetails,
   createFood,
-  foods
+  foods,
 });

@@ -15,7 +15,7 @@ export function* fetchReadings() {
       `${BASE_URL}/${API_ENDPOINTS.GET_ALL_READING_URL}`,
       {
         withCredentials: true,
-      }
+      },
     );
     yield put(fetchReadingsSuccess(response.data));
   } catch (error) {

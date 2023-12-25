@@ -1,6 +1,9 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { clearCredentials as clearCredentialsAction, setCredentials as setCredentialsAction } from './actions';
-import { getUserInfo } from './reducer';
+import { useSelector, useDispatch } from "react-redux";
+import {
+  clearCredentials as clearCredentialsAction,
+  setCredentials as setCredentialsAction,
+} from "./actions";
+import { getUserInfo } from "./reducer";
 
 function useAuth() {
   const dispatch = useDispatch();
@@ -11,7 +14,7 @@ function useAuth() {
     userInfo,
     {
       setCredentials,
-      clearCredentials
+      clearCredentials,
     },
   ];
 }

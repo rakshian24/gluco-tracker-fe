@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
-import { styled } from 'styled-components';
+import { Link } from "react-router-dom";
+import { styled } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BUTTON_TYPE } from '../../constants';
+import { BUTTON_TYPE } from "../../constants";
 
-const { PRIMARY, SECONDARY ,TERTIARY } = BUTTON_TYPE;
+const { PRIMARY, SECONDARY, TERTIARY } = BUTTON_TYPE;
 
 export const FormHeading = styled.h1`
   color: ${({ theme }) => theme.primaryColor};
@@ -12,7 +12,7 @@ export const FormHeading = styled.h1`
   font-size: 2.5rem;
   margin-bottom: 3rem;
 
-  @media screen and (min-width: 1024px){
+  @media screen and (min-width: 1024px) {
     font-size: 3rem;
     margin-bottom: 4rem;
     text-align: center;
@@ -26,54 +26,55 @@ export const FormItem = styled.div`
   margin-bottom: 2rem;
   font-weight: 400;
   color: ${({ theme }) => theme.secondaryColor};
-  
-  .form-input-container{
-    @media screen and (min-width: 501px) and (max-width: 1023px){
+
+  .form-input-container {
+    @media screen and (min-width: 501px) and (max-width: 1023px) {
       min-width: 48.5%;
     }
   }
 
-  input{
+  input {
     padding: 1.5rem;
     border: ${({ theme }) => `1px solid ${theme.textBoxBorderColor}`};
     border-radius: 1rem;
     font-size: 1.65rem;
 
-    @media screen and (min-width: 501px){
+    @media screen and (min-width: 501px) {
       font-size: 1.8rem;
     }
-    
+
     &::placeholder {
       color: ${({ theme }) => theme.placeholderColor};
       opacity: 0.5;
       font-size: 1.65rem;
-      @media screen and (min-width: 501px){
+      @media screen and (min-width: 501px) {
         font-size: 1.8rem;
       }
-    } 
+    }
     &:focus {
       outline: none !important;
       border: ${({ theme }) => `1.5px solid ${theme.textBoxBorderColor}`};
-      box-shadow: ${({ theme }) => `${theme.textBoxBorderColor} 0px 0px 0px 0.5px`};
+      box-shadow: ${({ theme }) =>
+        `${theme.textBoxBorderColor} 0px 0px 0px 0.5px`};
     }
 
-    &[type="checkbox"]{
+    &[type="checkbox"] {
       width: 2rem;
       height: 2rem;
       margin-right: 1rem;
       border: none;
       outline: none;
-      filter: hue-rotate(310deg)
+      filter: hue-rotate(310deg);
     }
   }
-  
-  label{
+
+  label {
     color: ${({ theme }) => theme.secondaryColor};
     font-size: 1.65rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
 
-    @media screen and (min-width: 501px){
+    @media screen and (min-width: 501px) {
       font-size: 1.8rem;
     }
   }
@@ -100,7 +101,7 @@ export const FormFooterTextContainer = styled.div`
   color: ${({ theme }) => theme.secondaryGrey};
   margin-bottom: 2rem;
 
-  @media screen and (min-width: 501px){
+  @media screen and (min-width: 501px) {
     font-size: 1.8rem;
   }
 `;
@@ -147,22 +148,22 @@ export const FormButton = styled.button`
 
   &:hover{
     background: ${({ theme, priority }) => {
-    switch (priority) {
-      case PRIMARY:
-        return theme.primaryBtnHoverColor;
-      case SECONDARY:
-        return theme.secondaryBtnHoverColor;
-      default:
-        return theme.primaryBtnHoverColor;
-    }
-  }};
+      switch (priority) {
+        case PRIMARY:
+          return theme.primaryBtnHoverColor;
+        case SECONDARY:
+          return theme.secondaryBtnHoverColor;
+        default:
+          return theme.primaryBtnHoverColor;
+      }
+    }};
 `;
 
 export const StyledLink = styled(Link)`
   color: ${({ theme }) => theme.primaryColor};
   font-weight: 500;
 
-  &:hover{
+  &:hover {
     text-decoration: underline;
   }
 `;
@@ -172,7 +173,7 @@ export const StyledToastContainer = styled(ToastContainer)`
     margin-top: 7rem;
     font-size: 1.5rem;
 
-    @media screen and (min-width: 501px){
+    @media screen and (min-width: 501px) {
       margin-top: 6rem;
     }
   }
@@ -187,7 +188,7 @@ export const Button = styled.button`
       case PRIMARY:
         return theme.primaryBtnColor;
       case TERTIARY:
-        return 'none';
+        return "none";
       default:
         return theme.primaryBtnColor;
     }
@@ -199,20 +200,20 @@ export const Button = styled.button`
       case TERTIARY:
         return theme.primaryColor;
       default:
-        return theme.primaryBtnTextColor
+        return theme.primaryBtnTextColor;
     }
   }};
   font-weight: 700;
   border-radius: 7px;
   box-shadow: 
-  box-shadow: ${({buttontype }) => {
+  box-shadow: ${({ buttontype }) => {
     switch (buttontype) {
       case PRIMARY:
-        return 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;';
+        return "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;";
       case TERTIARY:
-        return 'none';
+        return "none";
       default:
-        return 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;'
+        return "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;";
     }
   }};
   padding: 3px 11px;
@@ -220,15 +221,15 @@ export const Button = styled.button`
 
   &:hover{
     background: ${({ theme, buttontype }) => {
-    switch (buttontype) {
-      case PRIMARY:
-        return theme.primaryBtnHoverColor;
-      case TERTIARY:
-        return theme.lightGrey;
-      default:
-        return theme.primaryBtnHoverColor;
-    }
-  }};
+      switch (buttontype) {
+        case PRIMARY:
+          return theme.primaryBtnHoverColor;
+        case TERTIARY:
+          return theme.lightGrey;
+        default:
+          return theme.primaryBtnHoverColor;
+      }
+    }};
   }
 
   @media screen and (min-width: 501px) and (max-width: 1024px){
@@ -246,12 +247,12 @@ export const PageTitle = styled.h1`
   font-weight: 400;
   margin-bottom: 3rem;
   color: ${({ theme }) => theme.primaryColor};
-  
-  @media screen and (min-width: 501px) and (max-width: 1023px){
+
+  @media screen and (min-width: 501px) and (max-width: 1023px) {
     font-size: 3rem;
   }
 
-  @media screen and (min-width: 1024px){
+  @media screen and (min-width: 1024px) {
     font-size: 2.75rem;
   }
 `;
@@ -267,14 +268,15 @@ export const TextArea = styled.textarea`
   &:focus {
     outline: none;
     border: ${({ theme }) => `1.5px solid ${theme.textBoxBorderColor}`};
-    box-shadow: ${({ theme }) => `${theme.textBoxBorderColor} 0px 0px 0px 0.5px`};
+    box-shadow: ${({ theme }) =>
+      `${theme.textBoxBorderColor} 0px 0px 0px 0.5px`};
   }
 
   &::placeholder {
     color: ${({ theme }) => theme.placeholderColor};
     opacity: 0.5;
     font-size: 1.65rem;
-  } 
+  }
 `;
 
 export const FormFirstRowContainer = styled.div`

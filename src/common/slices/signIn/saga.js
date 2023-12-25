@@ -18,7 +18,7 @@ export function* signIn(action) {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
     yield put(setCredentials(response.data.data));
     yield put(signInSuccess(response.data.data));
